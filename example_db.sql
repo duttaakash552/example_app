@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 10, 2024 at 11:52 AM
+-- Generation Time: Aug 13, 2024 at 08:26 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -135,6 +135,8 @@ CREATE TABLE `contact_enquiries` (
   `phone` varchar(55) NOT NULL,
   `message` varchar(250) NOT NULL,
   `enquiry_type` varchar(55) NOT NULL,
+  `page_link` varchar(255) NOT NULL,
+  `page_title` varchar(250) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -143,13 +145,17 @@ CREATE TABLE `contact_enquiries` (
 -- Dumping data for table `contact_enquiries`
 --
 
-INSERT INTO `contact_enquiries` (`id`, `name`, `email`, `phone`, `message`, `enquiry_type`, `created_at`, `updated_at`) VALUES
-(1, 'gdfgdf', 'admin@gmail.com', '+445214562541', 'sdsd fgdf', 'Contact', '2024-07-19 06:34:10', '2024-07-19 06:34:10'),
-(2, 'fdgdf gf', 'dfg@dgfdf.gdfgf', '+445201256541', 'sdsdg sgsdfg', 'Contact', '2024-07-19 06:39:32', '2024-07-19 06:39:32'),
-(3, 'ggxcx dasfsd', 'sgdfg@dgdf.dggh', '+442514565215', 'dfgdfg dfgdf', 'Contact', '2024-07-19 07:06:05', '2024-07-19 07:06:05'),
-(4, 'sdfsd', 'sdds@sdf.dgf', '+445214523425', 'gfhfg sfgf', 'Contact', '2024-07-24 06:55:53', '2024-07-24 06:55:53'),
-(5, 'fdfgdf', 'fdgdf@fgdf.sdfg', '+445845265852', 'dfsdf sdfgfsg', 'Contact', '2024-07-30 06:23:53', '2024-07-30 06:23:53'),
-(6, 'dfgfd', 'dfggd@dfgdf.gfh', '+448521025658', 'fgdfg dfbgdg', 'Contact', '2024-07-30 06:24:35', '2024-07-30 06:24:35');
+INSERT INTO `contact_enquiries` (`id`, `name`, `email`, `phone`, `message`, `enquiry_type`, `page_link`, `page_title`, `created_at`, `updated_at`) VALUES
+(1, 'gdfgdf', 'admin@gmail.com', '+445214562541', 'sdsd fgdf', 'Contact', '', '', '2024-07-19 06:34:10', '2024-07-19 06:34:10'),
+(2, 'fdgdf gf', 'dfg@dgfdf.gdfgf', '+445201256541', 'sdsdg sgsdfg', 'Contact', '', '', '2024-07-19 06:39:32', '2024-07-19 06:39:32'),
+(3, 'ggxcx dasfsd', 'sgdfg@dgdf.dggh', '+442514565215', 'dfgdfg dfgdf', 'Contact', '', '', '2024-07-19 07:06:05', '2024-07-19 07:06:05'),
+(4, 'sdfsd', 'sdds@sdf.dgf', '+445214523425', 'gfhfg sfgf', 'Contact', '', '', '2024-07-24 06:55:53', '2024-07-24 06:55:53'),
+(5, 'fdfgdf', 'fdgdf@fgdf.sdfg', '+445845265852', 'dfsdf sdfgfsg', 'Contact', '', '', '2024-07-30 06:23:53', '2024-07-30 06:23:53'),
+(6, 'dfgfd', 'dfggd@dfgdf.gfh', '+448521025658', 'fgdfg dfbgdg', 'Contact', '', '', '2024-07-30 06:24:35', '2024-07-30 06:24:35'),
+(7, 'dfgdfs', 'sdfs@ghfgh.gjj', '+448563259656', 'dgfhfh gfhf', 'Contact', '', '', '2024-08-13 00:20:21', '2024-08-13 00:20:21'),
+(8, 'jhfyt', 'gtuy@hgfhg.hgfh', '+448521236589', 'gyuty iuyij', 'Contact Us', 'http://localhost/example-app/contact-us', 'Contact Us', '2024-08-13 00:29:49', '2024-08-13 00:29:49'),
+(9, 'gdfgdf dfg', 'sfsd@sfdsgd.gfh', '+442514523652', 'dhfgh gjghj', 'Contact Us', 'http://localhost/example-app/contact-us', 'Contact Us', '2024-08-13 00:47:52', '2024-08-13 00:47:52'),
+(10, 'dfgdf', 'fgdf@dgdgfh.ghj', '+441250365854', 'ghj ffghfg', 'Contact Us', 'http://localhost/example-app/contact-us', 'Contact Us', '2024-08-13 00:50:35', '2024-08-13 00:50:35');
 
 -- --------------------------------------------------------
 
@@ -329,7 +335,8 @@ INSERT INTO `pages` (`id`, `parent_id`, `title`, `slug`, `template`, `descriptio
 (30, 21, 'tes', 'tes', 1, '<p>zcvxzcv</p>', NULL, '1', 1, 'active', '0', '2024-07-24 06:51:31', '2024-07-24 06:51:31'),
 (31, 0, '404', '404', 1, NULL, NULL, '0', 1, 'inactive', '0', '2024-07-24 09:16:05', '2024-07-24 09:16:27'),
 (32, 20, 'dfsd', 'dfsd', 1, '<p>vfgdfg ghfh</p>', NULL, '1', 1, 'deleted', '0', '2024-07-24 12:29:42', '2024-07-24 12:42:31'),
-(33, 20, 'dfsd', 'dfsd', 2, '<p>fgdfgdf</p>', 'page_1721825063.jpg', '1', 1, 'active', '0', '2024-07-24 12:43:01', '2024-07-24 12:44:23');
+(33, 20, 'dfsd', 'dfsd', 2, '<p>fgdfgdf</p>', 'page_1721825063.jpg', '1', 1, 'active', '0', '2024-07-24 12:43:01', '2024-07-24 12:44:23'),
+(34, 0, 'Mail teamplate', 'mail-teamplate', 1, NULL, NULL, '0', 1, 'active', '0', '2024-08-13 05:39:25', '2024-08-13 05:39:25');
 
 -- --------------------------------------------------------
 
@@ -412,7 +419,8 @@ INSERT INTO `post_metas` (`id`, `post_id`, `meta_key`, `meta_value`, `post_type`
 (14, 1, 'banner_header', 'The Header', 'page', NULL, NULL),
 (16, 2, 'banner_header', 'This is our team', 'page', NULL, NULL),
 (17, 14, 'ewrwe_rfds', 'dsfds sdfs', 'post', NULL, NULL),
-(23, 18, 'gdfg_sfgf', 'gdfg dsfds', 'post', NULL, NULL);
+(23, 18, 'gdfg_sfgf', 'gdfg dsfds', 'post', NULL, NULL),
+(25, 34, 'mail_style', 'width:600px;border-spacing: 0; background: #00a1c5; padding: 20px;', 'page', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -501,8 +509,10 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('4IomPrRyH61UYPFKaI3BhjYit1PKPIMfIPQfaI4C', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiOHJqekJuZ1lZOGpwZTlrV0xkTWI4TXh0WkZDdnJlTTFUWW51VHdsdCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NjE6Imh0dHA6Ly9sb2NhbGhvc3QvZXhhbXBsZS1hcHA/cD1ibG9vZF9zYW1wbGVfYW5kX3VyaW5lX29yX3N3YWIiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1723095974),
-('Uz7rBotuEf22TW3LZoumj6QwPXZ4ThpkO7DfvhTc', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNUxDZUpBQlNiaWdoM0xZREdLN21BZ0owTWNuZGJTS1R4RnJSU0xFZCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo2MToiaHR0cDovL2xvY2FsaG9zdC9leGFtcGxlLWFwcD9wPWJsb29kX3NhbXBsZV9hbmRfdXJpbmVfb3Jfc3dhYiI7fX0=', 1723274105);
+('BJHnK3eaId7eGhnvUCfKJZzybEa3bYtHQ4ZSDotx', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoib1AzMjV4c25ONEt2MGFhWTFITmR0N0xpQWxDWVhmYTZSUkhjMk91USI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo2MToiaHR0cDovL2xvY2FsaG9zdC9leGFtcGxlLWFwcD9wPWJsb29kX3NhbXBsZV9hbmRfdXJpbmVfb3Jfc3dhYiI7fX0=', 1723530069),
+('Bn05azFbFaWpulkLkzpLxqzucFvYzwV6I9zEGTqg', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUVVjMzhlWnI5YzhHbG9vOTdiMWtSQ0V5VG1rVTlmQ3dNeXNBS25VNCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzI6Imh0dHA6Ly9sb2NhbGhvc3QvZXhhbXBsZS1hcHAvY29udGFjdC11cz9wPWJsb29kX3NhbXBsZV9hbmRfdXJpbmVfb3Jfc3dhYiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1723528212),
+('IR7d5nbpIjam2gNxVidYUEYSewUm1zMLm6L8auXa', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWXpEUzBGMjRXTndZd2RXU1p5Ym4ySGVTVXBwYVNsUmdqNnRRTGRINyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzI6Imh0dHA6Ly9sb2NhbGhvc3QvZXhhbXBsZS1hcHAvY29udGFjdC11cz9wPWJsb29kX3NhbXBsZV9hbmRfdXJpbmVfb3Jfc3dhYiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1723528212),
+('lvCnaPAsO7kIuAIytQrYiGqeUMiZmxhq1PySG9FM', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYkp0dlpuajQ3ZnlMMzYwZTR6RlhUamZaRFllSHlnRFRCaEs0ck1aQiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzE6Imh0dHA6Ly9sb2NhbGhvc3QvZXhhbXBsZS1hcHAvdGhhbmsteW91P3A9Ymxvb2Rfc2FtcGxlX2FuZF91cmluZV9vcl9zd2FiIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1723529555);
 
 -- --------------------------------------------------------
 
@@ -767,7 +777,7 @@ ALTER TABLE `category_post_tbls`
 -- AUTO_INCREMENT for table `contact_enquiries`
 --
 ALTER TABLE `contact_enquiries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -797,7 +807,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -809,7 +819,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `post_metas`
 --
 ALTER TABLE `post_metas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `post_meta_elements`
