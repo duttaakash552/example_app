@@ -73,6 +73,18 @@
 									</div>
 								</div>
 								<div class="row mb-3">
+									<label class="col-sm-3 col-form-label">Page Link</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" name="page_link" value="<?= isset($enquiry_details->page_link) ? $enquiry_details->page_link : '' ?>">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label class="col-sm-3 col-form-label">Page Title</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" name="page_title" value="<?= isset($enquiry_details->page_title) ? $enquiry_details->page_title : '' ?>">
+									</div>
+								</div>
+								<div class="row mb-3">
 									<label class="col-sm-3 col-form-label">Enquiry Date</label>
 									<div class="col-sm-9">
 										<input type="text" class="form-control" name="enquiry_date" value="<?= isset($enquiry_details->created_at) ? $date_only = date('d-M-Y', strtotime($enquiry_details->created_at)) : '' ?>">

@@ -16,10 +16,12 @@ class TestMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($details, $subject)
+    public function __construct($details, $subject, $settings, $style)
     {
         $this->details = $details;
 		$this->subject = $subject;
+		$this->settings = $settings;
+		$this->style = $style;
     }
 
     /**
@@ -35,7 +37,7 @@ class TestMail extends Mailable
     /**
      * Get the message content definition.
      */
-    public function content(): Content
+    /*public function content(): Content
     {
         return new Content(
             view: 'mails.test',
@@ -46,6 +48,12 @@ class TestMail extends Mailable
 				'messages' => $this->details['message']
             ],
         );
+    }*/
+	public function build()
+    {
+        return $this->view('mails.test')
+                    ->with(['details' => $this->details, 'settings' => $this->settings, 'style' => $this->style])
+                    ->subject($this->subject);
     }
 
     /**

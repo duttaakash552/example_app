@@ -9,7 +9,7 @@ use DB;
 class EnquiryController extends Controller
 {
     public function list() {
-		$enquiry_lists = DB::table('contact_enquiries')->get();
+		$enquiry_lists = DB::table('contact_enquiries')->orderBy('id', 'desc')->get();
 		$settings = DB::table('settings')->first();
 		return view('admin.enquiry.list', compact('enquiry_lists', 'settings'));
 	}

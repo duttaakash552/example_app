@@ -157,13 +157,13 @@ class PageController extends Controller
 	public function contact_submit(Request $request) {
 		if ($request->ajax()) {
 			
-			$validator = Validator::make($request->all(), [
-				'g-recaptcha-response' => 'required|captcha',
+			/*$validator = Validator::make($request->all(), [
+				'g-recaptcha-response' => 'required',
 			]);
 			
 			if ($validator->fails()) {
 				return response()->json(['status' => false, 'danger' => 'The g-recaptcha-response field is required.']);
-			}
+			}*/
 			
 			$full_url = request()->headers->get('referer');
 			$url = parse_url($full_url, PHP_URL_SCHEME).'://'.parse_url($full_url, PHP_URL_HOST);
@@ -174,7 +174,7 @@ class PageController extends Controller
 				return response()->json(['status' => true, 'success' => 'Email sent successfully']);
 			}
 			
-			$input = $request->only('name','email','phone','message', 'enquiry_type');
+			$input = $request->only('name','email','phone','message', 'enquiry_type', 'page_link', 'page_title');
 			/*$to = getOption('site_emails') ? getOption('site_emails') : '';
 			$cc  = getOption('site_cc_emails') ? getOption('site_cc_emails') : '';
 			$bcc = getOption('site_bcc_emails') ? getOption('site_bcc_emails') : '';*/
@@ -182,14 +182,16 @@ class PageController extends Controller
 			//$email_arr = array('to' => $to, 'cc' => $cc, 'bcc' => $bcc, 'subject' => $subject);
 			
 			$email_exist_in_form = 0; $name_exist_in_form = 0; $hour = 24;
-			if (ContactEnquiry::where([['email', $request->email],['enquiry_type', 'Contact']])->where('created_at', '>', Carbon::now()->subHours($hour)->toDateTimeString())->count()) {
+			if (ContactEnquiry::where([['email', $request->email],['enquiry_type', $request->enquiry_type]])->where('created_at', '>', Carbon::now()->subHours($hour)->toDateTimeString())->count()) {
 				$email_exist_in_form = 1;
 			}    
-			if (ContactEnquiry::where([['name', $input['name']],['enquiry_type', 'Contact']])->where('created_at', '>', Carbon::now()->subHours($hour)->toDateTimeString())->count()) {
+			if (ContactEnquiry::where([['name', $input['name']],['enquiry_type', $request->enquiry_type]])->where('created_at', '>', Carbon::now()->subHours($hour)->toDateTimeString())->count()) {
 				$name_exist_in_form = 1;
 			}
 			
 			$messgeField = NULL;
+			$settings = DB::table('settings')->first();
+			$style = DB::table('post_metas')->where('post_id', 34)->where('post_type', 'page')->where('meta_key', 'mail_style')->first();
 			
 			if(
 			  $this->validatePhoneNumber($input['phone']) == false ||
@@ -208,7 +210,7 @@ class PageController extends Controller
 					});*/
 
 					Mail::to('duttaakash552@gmail.com')
-							->cc('cc@example.com')->bcc('bcc@example.com')->send(new TestMail($input, $subject));
+							->cc('cc@example.com')->bcc('bcc@example.com')->send(new TestMail($input, $subject, $settings, $style));
 					
 					Session::flash('success', 'Email sent successfully');
 					return response()->json(['status' => true, 'success' => 'Email sent successfully']);
@@ -228,7 +230,7 @@ class PageController extends Controller
 						$message->to($email_arr['to'])->subject($email_arr['subject']);
 					});*/
 					Mail::to('duttaakash552@gmail.com')
-							->cc('cc@example.com')->bcc('bcc@example.com')->send(new TestMail($input, $subject));
+							->cc('cc@example.com')->bcc('bcc@example.com')->send(new TestMail($input, $subject, $settings, $style));
 					
 					ContactEnquiry::create($input);
 					Session::flash('success', 'Email sent successfully');

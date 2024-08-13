@@ -1,5 +1,12 @@
 @extends('assets.frontend.layout')
-@section('title', 'Page Not Found')
+@php
+if(isset($metadata) && !empty($metadata->title)) {
+	$title = $metadata->title;
+}else {
+	$title = '404 page not found';
+}
+@endphp
+@section('title',$title)
 @section('content')
 <section class="error-section">
     <div class="container">

@@ -14,6 +14,8 @@ class ContactEnquiry extends Model
         'email',
         'phone',
 		'message',
-		'enquiry_type'
+		'enquiry_type',
+		'page_link',
+		'page_title'
     ];
 }

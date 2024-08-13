@@ -35,6 +35,7 @@
 								<th>Name</th>
 								<th>Email</th>
 								<th>Phone</th>
+								<th>Enquiry Type</th>
 								<th>Action</th>
 							</tr>
 						</thead>
@@ -46,6 +47,7 @@
 								<td>{{ $enquiry_list->name }}</td>
 								<td>{{ $enquiry_list->email }}</td>
 								<td>{{ $enquiry_list->phone }}</td>
+								<td>{{ $enquiry_list->enquiry_type }}</td>
 								<td><a href="{{ route('admin.enquiry.details', $enquiry_list->id) }}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a></td>
 							</tr>
 						<?php } ?>

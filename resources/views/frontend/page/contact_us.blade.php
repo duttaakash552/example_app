@@ -1,5 +1,12 @@
 @extends('assets.frontend.layout')
-@section('title','Contact Us')
+@php
+if(isset($metadata) && !empty($metadata->title)) {
+	$title = $metadata->title;
+}else {
+	$title = 'Contact Us';
+}
+@endphp
+@section('title',$title)
 @section('content')
 <section class="inner-banner">
     <picture>
@@ -78,6 +85,22 @@
                     </div>
                 </div>
             </div>
+			<?php
+				$url = '';
+				$page_title = '';
+			?>
+			<?php
+				$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+
+				// Get the server name and port if applicable
+				$host = $_SERVER['HTTP_HOST'];
+
+				// Get the request URI (path and query string)
+				$requestUri = $_SERVER['REQUEST_URI'];
+
+				// Construct the full URL
+				$url = $protocol . '://' . $host . $requestUri;
+			?>
             <div class="col-md-8">
                 <h1>Contact Us</h1>
                 <form id="contact-form" action="<?= route('contact.form.submit') ?>" method="post" novalidate="novalidate">
@@ -85,14 +108,14 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input id="form_name" name="name" class="form-control" type="text"
+                                <input id="name" name="name" class="form-control" type="text"
                                     placeholder="Enter Name">
 								<div class="error error_name"></div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input id="form_email" name="email" class="form-control" type="email"
+                                <input id="email" name="email" class="form-control" type="email"
                                     placeholder="Enter Email">
 								<div class="error error_email"></div>
                             </div>
@@ -100,24 +123,23 @@
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input id="form_phone" name="phone" class="form-control" type="text"
+                                <input id="phone" name="phone" class="form-control" type="text"
                                     placeholder="Enter Phone">
 								<div class="error error_phone"></div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <textarea id="form_message" name="message" class="form-control message" rows="5"
+                        <textarea id="message" name="message" class="form-control message" rows="5"
                             placeholder="Enter Message"></textarea>
 						<div class="error error_message"></div>
                     </div>
 					<input type="hidden" name="enquiry_type" value="Contact" />
 
                     <div class="form-group">
-                        <input type="hidden" name="page_by" value="contactPageForm">
-                        <input type="hidden" id="pageURL" name="pageURL" class="form-control"
-                            value="https://www.stdcheck.london/contact">
-                        <input type="hidden" id="pageName" name="pageName" class="form-control" value="Contact ">
+                        <input type="hidden" name="enquiry_type" value="Contact Us" />
+						<input type="hidden" name="page_link" value="{{ $url }}" />
+						<input type="hidden" class="page_title" name="page_title" value="" />
                         <div class="g-recaptcha" data-sitekey="{{ config('captcha.sitekey') }}"></div>
 						<div class="error error_captcha" style="color: red"></div>
                         <button type="button" class="btn btn_submit contact_btn">Send</button>
