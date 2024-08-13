@@ -8,6 +8,7 @@ if(isset($metadata) && !empty($metadata->title)) {
 @endphp
 @section('title', $title)
 @section('content')
+@include('assets.frontend.breadcrumb')
 <section class="error-section">
 	<div class="container">
 		<div class="row justify-content-center">

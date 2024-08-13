@@ -5,8 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @php
-		$currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+	    // Check if the connection is secure (HTTPS)
+        $isSecure = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
+
+        // Determine the protocol
+        $protocol = $isSecure ? 'https' : 'http';
+        
+		$currentURL = "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 	@endphp
+	
 	@php
 		if (isset($settings)) {
 	@endphp
@@ -145,7 +152,7 @@
 </head>
 
 <body>
-
+<header>
 <div class="sticky-header fixed-header">
 	<div class="desktop_sticky">
 		<div class="container">
@@ -384,6 +391,7 @@
 		</nav>
 	</div>
 </div>
+</header>
 @yield('content')
 <footer class="mt-4">
     <div class="container">

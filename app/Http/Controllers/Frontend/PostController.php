@@ -9,29 +9,13 @@ use DB;
 class PostController extends Controller
 {
     public function index($param1, $param2 = null, $param3 = null)
-    {
-		// Check if the connection is secure (HTTPS) or not (HTTP)
-		$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-		
-		// Get the host (domain name)
-		$host = $_SERVER['HTTP_HOST'];
-		
-		// Get the current request URI
-		$requestUri = $_SERVER['REQUEST_URI'];
-		
-		// Construct and return the full URL
-		$url = $scheme . '://' . $host . $requestUri;
-		
-		// Parse the URL and get the path component
-		$path = parse_url($url, PHP_URL_PATH);
-		
-		// Split the path by '/' to get the segments
-		$segments = explode('/', trim($path, '/'));
-		
-		// Return the last segment (slug)
-		$slug = end($segments);
-		
+    {	
 		$replacements = array();
+		// Get the current URL
+		$url = $_SERVER['REQUEST_URI'];
+		
+		// Break the URL into parts
+		$urlParts = explode('/', trim($url, '/'));
 		/***********Top Menu*****************/
 		$menu = array();
 		$header = DB::table('pages as p1')
@@ -106,10 +90,10 @@ class PostController extends Controller
 									->first();
 			
 			if($page->template_name == 'Default Template') {
-				return view('frontend.page.index', compact('page', 'settings', 'processed_input', 'menu', 'array_key', 'banner_header', 'metadata', 'mega_menu'));
+				return view('frontend.page.index', compact('page', 'settings', 'processed_input', 'menu', 'array_key', 'banner_header', 'metadata', 'mega_menu', 'urlParts'));
 			}
 			if($page->template_name == 'Left Sidebar Page') {
-				return view('frontend.page.left_sidebar_template', compact('page', 'settings', 'processed_input', 'menu', 'array_key', 'banner_header', 'metadata', 'mega_menu'));
+				return view('frontend.page.left_sidebar_template', compact('page', 'settings', 'processed_input', 'menu', 'array_key', 'banner_header', 'metadata', 'mega_menu', 'urlParts'));
 			}
 		}else {
 			$last_param = (!empty($param3)) ? $param3 : ((!empty($param2)) ? $param2 : $param1);
@@ -142,28 +126,28 @@ class PostController extends Controller
 						$slug2 = DB::table('category_posts')->where('slug', $param2)->first();
 						if(isset($slug2)) {
 							if(($slug2->parent_category == $slug1) && in_array($slug1, $categories_arr)) {
-								return view('frontend.post.blog.details', compact('post', 'settings', 'processed_input', 'menu', 'array_key', 'metadata', 'mega_menu'));
+								return view('frontend.post.blog.details', compact('post', 'settings', 'processed_input', 'menu', 'array_key', 'metadata', 'mega_menu', 'urlParts'));
 							}else {
-								return view('frontend.page.404', compact('settings', 'menu', 'array_key', 'metadata', 'mega_menu'));
+								return view('frontend.page.404', compact('settings', 'menu', 'array_key', 'metadata', 'mega_menu', 'urlParts'));
 							}
 						}else {
-							return view('frontend.page.404', compact('settings', 'menu', 'array_key', 'metadata' ,'mega_menu'));
+							return view('frontend.page.404', compact('settings', 'menu', 'array_key', 'metadata' ,'mega_menu', 'urlParts'));
 						}
 					}else if($last_param == $param2) {
 						$slug1 = DB::table('category_posts')->where('slug', $param1)->value('id');
 						if(in_array($slug1, $categories_arr)) {
-							return view('frontend.post.blog.details', compact('post', 'settings', 'processed_input', 'menu', 'array_key', 'metadata', 'mega_menu'));
+							return view('frontend.post.blog.details', compact('post', 'settings', 'processed_input', 'menu', 'array_key', 'metadata', 'mega_menu', 'urlParts'));
 						}else {
-							return view('frontend.page.404', compact('settings', 'menu', 'array_key', 'mega_menu', 'metadata'));
+							return view('frontend.page.404', compact('settings', 'menu', 'array_key', 'mega_menu', 'metadata', 'urlParts'));
 						}
 					}else {
-						return view('frontend.post.blog.details', compact('post', 'settings', 'processed_input', 'menu', 'array_key', 'metadata', 'mega_menu'));
+						return view('frontend.post.blog.details', compact('post', 'settings', 'processed_input', 'menu', 'array_key', 'metadata', 'mega_menu', 'urlParts'));
 					}
 				}else {
-					return view('frontend.page.404', compact('settings', 'menu', 'array_key', 'metadata', 'mega_menu'));
+					return view('frontend.page.404', compact('settings', 'menu', 'array_key', 'metadata', 'mega_menu', 'urlParts'));
 				}
 			}else {
-				return view('frontend.page.404', compact('settings', 'menu', 'array_key', 'metadata', 'mega_menu'));
+				return view('frontend.page.404', compact('settings', 'menu', 'array_key', 'metadata', 'mega_menu', 'urlParts'));
 			}
 		}
     }

@@ -28,6 +28,7 @@
 	$date = $datetime->format('d, M, Y');
 	
 @endphp
+@include('assets.frontend.breadcrumb')
 <section class="blog_section inner-section">
     <div class="container">
         <div class="row">
