@@ -52,13 +52,13 @@
 									</div>
 									<div class="row mb-3">
 										<label for="editor" class="col-sm-3 col-form-label">Header</label>
-										<div class="border rounded-4 text-center p-4 mb-4">
+										<div class="border rounded-4 p-4 mb-4">
 											<textarea id="editor" name="template_header"><?= $template->template_header ?></textarea>
 										</div>
 									</div>
 									<div class="row mb-3">
 										<label for="editor" class="col-sm-3 col-form-label">Footer</label>
-										<div class="border rounded-4 text-center p-4 mb-4">
+										<div class="border rounded-4 p-4 mb-4">
 											<textarea id="editor" name="template_footer"><?= $template->template_footer ?></textarea>
 										</div>
 									</div>
