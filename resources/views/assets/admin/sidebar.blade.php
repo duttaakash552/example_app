@@ -97,9 +97,9 @@
 					<div class="menu-title">Templates</div>
 				</a>
 				<ul>
-					<li> <a href="<?= route('admin.page.list'); ?>"><i class='bx bx-radio-circle'></i>List</a>
+					<li> <a href="<?= route('admin.template.list'); ?>"><i class='bx bx-radio-circle'></i>List</a>
 					</li>
-					<li> <a href="<?= route('admin.page.create') ?>"><i class='bx bx-radio-circle'></i>Add</a>
+					<li> <a href="<?= route('admin.template.create') ?>"><i class='bx bx-radio-circle'></i>Add</a>
 					</li>
 				</ul>
 			</li>

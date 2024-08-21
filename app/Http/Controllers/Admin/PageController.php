@@ -15,7 +15,7 @@ class PageController extends Controller
 	}
 	
 	public function create() {
-		$templates = DB::table('templates')->where('type', 'Page')->get();
+		$templates = DB::table('templates')->get();
 		$pages = DB::table('pages')->where('status', '<>', 'deleted')->get();
 		$settings = DB::table('settings')->first();
 		return view('admin.page.add', compact('templates', 'pages', 'settings'));
@@ -91,7 +91,7 @@ class PageController extends Controller
 		$categories_elements = DB::table('post_meta_elements')->where('post_id', $id)->where('post_type', 'page')->first();
 		$custom_fields = DB::table('post_metas')->where('post_id', $id)->where('post_type', 'page')->get();
 		$page = DB::table('pages')->where('id', $id)->first();
-		$templates = DB::table('templates')->where('type', 'Page')->get();
+		$templates = DB::table('templates')->get();
 		$pages = DB::table('pages')->where('id', '<>', $id)->where('status', '<>', 'deleted')->get();
 		$settings = DB::table('settings')->first();
 		return view('admin.page.edit', compact('page', 'templates', 'pages', 'categories_elements', 'custom_fields', 'settings'));
@@ -99,7 +99,17 @@ class PageController extends Controller
 	
 	public function update(Request $request, $id) {
 		$data = array();
-		$str = $request->title;
+		$slug = $request->slug;
+		$is_slug_exist = DB::table('pages')
+								->where('id', '<>', $id)
+								->where('slug', $slug)
+								->where('status', '<>', 'deleted')
+								->value('slug');
+								
+		if(!empty($is_slug_exist)) {
+			return redirect()->back()->with('success_message', 'This url already exists');
+		}
+		/*$str = $request->title;
 		$delimiter = '-';
 		$slug = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $str))))), $delimiter));
 		$is_slug_exist = DB::table('pages')
@@ -126,12 +136,12 @@ class PageController extends Controller
 			}
 			
 			$slug = $slug.'-'.$randomString;
-		}
+		}*/
 		
 		$data = [
 			'parent_id' => $request->parent_id,
 			'title' => $request->title,
-			'slug' => $slug,
+			'slug' => $request->slug,
 			'template' => $request->template,
 			'description' => $request->description,
 			'ckeck_menu' => ((isset($request->ckeck_menu)) ? $request->ckeck_menu : '0'),

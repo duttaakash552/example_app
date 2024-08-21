@@ -10,9 +10,9 @@ if(isset($metadata) && !empty($metadata->title)) {
 @section('content')
 <section class="inner-banner">
     <picture>
-        <source srcset="public/uploads/page/{{ $page->image }}">
-        <source srcset="public/uploads/page/{{ $page->image }}">
-        <img src="public/uploads/page/{{ $page->image }}" alt="{{ $page->title }}" class="img-fluid inner-banner-img">
+        <source srcset="{{ URL::to('/') }}/public/uploads/page/{{ $page->image }}">
+        <source srcset="{{ URL::to('/') }}/public/uploads/page/{{ $page->image }}">
+        <img src="{{ URL::to('/') }}/public/uploads/page/{{ $page->image }}" alt="{{ $page->title }}" class="img-fluid inner-banner-img">
     </picture>
     <div class="inner-banner-content">
         <div class="container">

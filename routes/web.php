@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PostMetaElementController;
 use App\Http\Controllers\Admin\PostMetaController;
 use App\Http\Controllers\Admin\EnquiryController;
+use App\Http\Controllers\Admin\TemplateController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\Frontend\PageController as FrontenfPageController;
 
@@ -64,6 +65,11 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::post('/post-meta-element/update', [PostMetaElementController::class, 'metaupdate'])->name('admin.post.meta.update');
 		Route::get('/enquiry/list', [EnquiryController::class, 'list'])->name('admin.enquiry.list');
 		Route::get('/enquiry/details/{id}', [EnquiryController::class, 'details'])->name('admin.enquiry.details');
+		Route::get('/template/create', [TemplateController::class, 'index'])->name('admin.template.create');
+		Route::post('/template/insert', [TemplateController::class, 'insert'])->name('admin.template.insert');
+		Route::get('/template/list', [TemplateController::class, 'list'])->name('admin.template.list');
+		Route::get('/template/edit/{id}', [TemplateController::class, 'edit'])->name('admin.template.edit');
+		Route::post('/template/update/{id}', [TemplateController::class, 'update'])->name('admin.template.update');
 		Route::get('/logout', [AuthController::class, 'logout'])->name('dashboard.logout');
 	});
 });

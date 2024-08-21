@@ -236,7 +236,7 @@
 		
 		new FroalaEditor('#editor', {
 
-          htmlAllowedTags: ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'picture', 'div', 'span', 'img', 'hr', 'br', 'section', 'ul', 'li', 'a', 'iframe' , 'i', 'b', 'u', 'table', 'tr', 'td', 'th', 'strong', 'em', 'blockquote', 'code', 'pre', 'button', 'input']
+          htmlAllowedTags: ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'picture', 'div', 'span', 'img', 'hr', 'br', 'section', 'ul', 'li', 'a', 'iframe' , 'i', 'b', 'u', 'table', 'tr', 'td', 'th', 'strong', 'em', 'blockquote', 'code', 'pre', 'button', 'input', 'header']
 
         });
 		

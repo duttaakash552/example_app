@@ -48,7 +48,7 @@ class PostController extends Controller
 		});
 		/****************Top Menu End*******************/
 		$page = DB::table('pages')
-						->select('pages.*','templates.name as template_name')
+						->select('pages.*','templates.name as template_name', 'templates.template_header', 'templates.template_footer')
 						->join('templates', 'templates.id', '=', 'pages.template')
 						->where('slug', $param1)
 						->where('status', 'active')
@@ -91,9 +91,10 @@ class PostController extends Controller
 			
 			if($page->template_name == 'Default Template') {
 				return view('frontend.page.index', compact('page', 'settings', 'processed_input', 'menu', 'array_key', 'banner_header', 'metadata', 'mega_menu', 'urlParts'));
-			}
-			if($page->template_name == 'Left Sidebar Page') {
+			}else if($page->template_name == 'Left Sidebar Page') {
 				return view('frontend.page.left_sidebar_template', compact('page', 'settings', 'processed_input', 'menu', 'array_key', 'banner_header', 'metadata', 'mega_menu', 'urlParts'));
+			}else {
+				return view('frontend.page.index', compact('page', 'settings', 'processed_input', 'menu', 'array_key', 'banner_header', 'metadata', 'mega_menu', 'urlParts'));
 			}
 		}else {
 			$last_param = (!empty($param3)) ? $param3 : ((!empty($param2)) ? $param2 : $param1);
